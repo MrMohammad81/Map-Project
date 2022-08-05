@@ -1,6 +1,7 @@
 <?php
-include_once "constant.php";
-include BASE_PATH . "bootstrap/config.php";
+session_start();
+include "constant.php";
+include BASE_PATH . "Bootstrap/config.php";
 include BASE_PATH . "libs/helpers.php";
 
 try {
@@ -9,6 +10,8 @@ try {
     diePage('Connection failed: ' . $e->getMessage());
 }
 
+include BASE_PATH . "libs/lib-user.php";
 include BASE_PATH . "libs/lib-location.php";
+
 
 

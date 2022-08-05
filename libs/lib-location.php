@@ -1,5 +1,4 @@
 <?php
-include_once "../Bootstrap/init.php";
 
 # Add Location
 function insertLocation($data)

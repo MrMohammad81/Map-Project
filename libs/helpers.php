@@ -42,3 +42,13 @@ function site_url($uri = '')
 {
     return BASE_URL .$uri;
 }
+
+function alertMesseg($msg)
+{
+    echo "<script>alert('$msg')</script>";
+}
+
+function error($msg)
+{
+    echo "<span>$msg</span>";
+}
