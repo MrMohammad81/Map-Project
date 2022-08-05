@@ -5,11 +5,6 @@ function GetCurrentUrl(): int
     return 1;
 }
 
-function power($p , $b)
-{
-    return $p**$b;
-}
-
  function asset(string $path): string
 {
     return APP_URL . '/assets/' . $path;
