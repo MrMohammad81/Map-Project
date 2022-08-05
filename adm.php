@@ -1,4 +1,7 @@
 <?php
+
+use Hekmatinasser\Verta\Verta;
+
 include "Bootstrap/init.php";
 
 # log out
@@ -18,6 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 #check login
 if (isLoggedIn())
 {
+    $params = $_GET ?? [];
+    $locations = getLocations($params);
     include "template/tpl-adm.php";
 }else{
     include "template/tpl-adm-auth.php";

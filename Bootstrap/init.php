@@ -2,6 +2,7 @@
 session_start();
 include "constant.php";
 include BASE_PATH . "Bootstrap/config.php";
+include BASE_PATH . "vendor/autoload.php";
 include BASE_PATH . "libs/helpers.php";
 
 try {

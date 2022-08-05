@@ -1,3 +1,8 @@
+<?php
+
+use Hekmatinasser\Verta\Verta;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +15,7 @@
     <style>
     body{
         background:#f2f2f2;
+        font-size: 19px;
     }
     a{
         text-decoration: none;
@@ -19,7 +25,7 @@
     }
 
     .main-panel{
-        width:1000px;
+        width:1300px;
         margin:30px auto;
     }
     .box {
@@ -35,6 +41,7 @@
     }
     .statusToggle {
         background: #eee;
+        min-width: 70px;
         color: #686868;
         border: 0;
         padding: 3px 12px;
@@ -42,9 +49,10 @@
         cursor: pointer;
         font-size: 13px;
         font-weight: 400;
-        font-family: iransans;
+        font-family: sans-serif, serif;
         display:inline-block;
         margin:0 3px;
+        text-align: center;
     }
     .statusToggle.active {
         background: #0c8f10;
@@ -83,8 +91,9 @@
         <h1>پنل مدیریت <span style="color:#007bec">مپ</span></h1>
         <div class="box">
             <a class="statusToggle" href="<?=BASE_URL?>" target="_blank">🏠</a>
-            <a class="statusToggle active" href="?status=1">فعال</a>
-            <a class="statusToggle" href="?status=0">غیرفعال</a>
+            <a class="statusToggle active" href="?verified=1">فعال</a>
+            <a class="statusToggle" href="?verified=0">غیرفعال</a>
+            <a class="statusToggle" href="?all=1">همه مکان ها</a>
             <a class="statusToggle" href="?logout=1" style="float:left">خروج</a>
         </div>
         <div class="box">
@@ -99,19 +108,20 @@
         </tr>
         </thead>
         <tbody>
-        <?php for($i=0;$i<10;$i++): ?>
+        <?php foreach ($locations as $location): ?>
         <tr>
-            <td>نام مکان اینجا</td>
-            <td class="text-center">12 خرداد 95</td>
-            <td class="text-center">25.454</td>
-            <td class="text-center">34.456</td>
+            <td><?=$location -> Title?></td>
+            <td class="text-center"><?= Verta::instance($location -> created_at)-> format('%d %B %Y') ?></td>
+            <td class="text-center"><?= $location -> lat?></td>
+            <td class="text-center"><?= $location -> lng?></td>
             <td>
-                <button class="statusToggle active" data-loc='111'>فعال</button> 
-                <button class="statusToggle" data-loc='111'>غیر فعال</button> 
-                <button class="preview" data-loc='111'>👁️‍🗨️</button> 
+                <button class="statusToggle <?= $location -> verified ? 'active' : '' ?>" data-loc='<?=$location -> ID?>>'>
+                    <?=$location -> verified ? 'فعال' : 'غیرفعال'?>
+                </button>
+                <button class="preview" data-loc='111'>👁️‍🗨️</button>
             </td>
         </tr>
-<?php endfor; ?>        
+<?php endforeach; ?>
         </tbody>
         </table>
         </div>

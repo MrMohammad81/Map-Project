@@ -33,7 +33,7 @@ function isAjaxRequest()
 # die and dump
 function dd($var)
 {
-    echo "<pre style='color: rebeccapurple; background-color: #fff; z-index: 999; position: relative; padding: 10px; margin: 10px; border-radius: 5px; border-left: 3px solid #1276ab;'>";
+    echo "<pre style='direction: ltr; text-align: left; color: rebeccapurple; background-color: #fff; z-index: 999; position: relative; padding: 10px; margin: 10px; border-radius: 5px; border-left: 3px solid #1276ab;'>";
     var_dump($var);
     echo "</pre>";
 }

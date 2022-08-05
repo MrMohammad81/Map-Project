@@ -19,12 +19,18 @@
 <body>
 <div class="main">
     <div class="head">
-        <input type="text" id="search" placeholder="دنبال کجا می گردی؟">
+        <div class="search-box">
+            <input type="text" id="search" placeholder="دنبال کجا می گردی؟" autocomplete="off">
+            <div class="clear"></div>
+            <div class="search-results" style="display:none"></div>
+        </div>
     </div>
     <div class="mapContainer">
         <div id="map"></div>
     </div>
+    <img src="assets/img/current.png" class="currentLoc">
 </div>
+
 <div class="modal-overlay" style="display: none;">
     <div class="modal">
         <span class="close">X</span>
