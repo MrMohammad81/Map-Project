@@ -77,5 +77,10 @@
     <?php if ($location): ?>
          L.marker([<?= $location -> lat?> , <?= $location -> lng?>]).addTo(map).bindPopup("<?= $location -> Title?>").openPopup();
     <?php endif; ?>
+    $(document).ready(function (){
+       $('.mapContainer').click(function (){
+           locate();
+       })
+    });
 </script>
 </html>
