@@ -10,7 +10,7 @@ use Hekmatinasser\Verta\Verta;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Map Panel</title>
     <link href="favicon.png" rel="shortcut icon" type="image/png">
-
+    <link href="<?=site_url('assets/css/font-awesome.min.css')?>">
     <link rel="stylesheet" href="assets/css/styles.css<?="?v=" . rand(99, 9999999)?>" />
     <style>
     body{
@@ -49,13 +49,17 @@ use Hekmatinasser\Verta\Verta;
         cursor: pointer;
         font-size: 13px;
         font-weight: 400;
-        font-family: sans-serif, serif;
+        font-family: sahel, serif !important;
         display:inline-block;
         margin:0 3px;
         text-align: center;
     }
     .statusToggle.active {
         background: #0c8f10;
+        color: #ffffff;
+    }
+    .statusToggle.all {
+        background: #005cbf;
         color: #ffffff;
     }
     .statusToggle:hover,button.preview:hover {
@@ -84,6 +88,9 @@ use Hekmatinasser\Verta\Verta;
     .text-center{
         text-align: center;
     }
+    .remove{
+
+    }
     </style>
 </head>
 <body>
@@ -91,9 +98,9 @@ use Hekmatinasser\Verta\Verta;
         <h1>پنل مدیریت <span style="color:#007bec">مپ</span></h1>
         <div class="box">
             <a class="statusToggle" href="<?=BASE_URL?>" target="_blank">🏠</a>
+            <a class="statusToggle all" href="<?=site_url('adm.php')?>">همه مکان ها</a>
             <a class="statusToggle active" href="?verified=1">فعال</a>
             <a class="statusToggle" href="?verified=0">غیرفعال</a>
-            <a class="statusToggle" href="?all=1">همه مکان ها</a>
             <a class="statusToggle" href="?logout=1" style="float:left">خروج</a>
         </div>
         <div class="box">
@@ -118,10 +125,13 @@ use Hekmatinasser\Verta\Verta;
                 <button class="statusToggle <?= $location -> verified ? 'active' : '' ?>" data-loc='<?=$location -> ID?>>'>
                     <?=$location -> verified ? 'فعال' : 'غیرفعال'?>
                 </button>
-                <button class="preview" data-loc='111'>👁️‍🗨️</button>
+                <button class="preview" data-loc='<?= $location -> ID ?>'>👁️‍🗨️</button>
+                <a href="?delete_loc=<?=$location -> ID?>">
+                   <button class="remove" onclick="return confirm('آیا از حذف این مکان اطمینان دارید؟\n<?=$location->Title?>')" >حذف</button>
+                </a>
             </td>
         </tr>
-<?php endforeach; ?>
+        <?php endforeach; ?>
         </tbody>
         </table>
         </div>
@@ -141,12 +151,34 @@ use Hekmatinasser\Verta\Verta;
 
     <script src="assets/js/jquery.min.js"></script>
     <script>
-    $(document).ready(function() {
-        $('.preview').click(function() {
+    $(document).ready(function()
+    {
+        $('.preview').click(function()
+        {
             $('.modal-overlay').fadeIn();
-            $('#mapWivdow').attr('src','<?=BASE_URL?>');
+            $('#mapWivdow').attr('src','<?=BASE_URL?>?loc=' + $(this).attr('data-loc'));
         });
-        $('.modal-overlay .close').click(function() {
+
+        // change Status Toggle
+        $('.statusToggle').click(function (){
+            var locId = $(this).attr('data-loc');
+            $.ajax({
+                url : '<?=site_url("process/statusToggle.php")?>',
+                method : 'post',
+                data : {loc:locId},
+                success : function (response)
+                {
+                    if (response == 1)
+                    {
+                        location.reload();
+                    }
+                }
+            })
+        })
+
+        // close modal
+        $('.modal-overlay .close').click(function()
+        {
             $('.modal-overlay').fadeOut();
         });
     });

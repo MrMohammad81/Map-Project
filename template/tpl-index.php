@@ -73,4 +73,9 @@
 </body>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/script.js <?= '?v=' . rand(99,9999) ?>"></script>
+<script>
+    <?php if ($location): ?>
+         L.marker([<?= $location -> lat?> , <?= $location -> lng?>]).addTo(map).bindPopup("<?= $location -> Title?>").openPopup();
+    <?php endif; ?>
+</script>
 </html>

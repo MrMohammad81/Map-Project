@@ -18,6 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         Messeg("نام کاربری یا رمز عبور نامعتبر می باشد.");
     }
 }
+
+#delete locations
+if (isset($_GET['delete_loc']) && is_numeric($_GET['delete_loc']))
+{
+    $deleteLoc = deleteLocations($_GET['delete_loc']);
+}
+
 #check login
 if (isLoggedIn())
 {

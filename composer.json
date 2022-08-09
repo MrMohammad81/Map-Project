@@ -1,5 +1,6 @@
 {
     "require": {
-        "hekmatinasser/verta": "^8.1"
+        "hekmatinasser/verta": "^8.1",
+      "ext-pdo": "*"
     }
 }

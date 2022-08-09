@@ -49,3 +49,4 @@ $(document).ready(function ()
     });
 
 })
+map.addControl(new L.Control.Gps())
