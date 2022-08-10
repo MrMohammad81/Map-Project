@@ -49,25 +49,3 @@ $(document).ready(function ()
     });
 
 })
-
-// geo Location api
-var current_position , current_accuracy
-map.on('locationfound',function (e)
-{
-    if (current_position)
-    {
-        map.removeLayer(current_position);
-        map.removeLayer(current_accuracy);
-    }
-    var radius = e.accuracy/3;
-    current_position = L.marker(e.latlng).addTo(map).bindPopup("فاصله تقریبی تا مکان شما :"+ radius + "متر").openPopup();
-    current_accuracy = L.circle(e.latlng , radius).addTo(map);
-});
-map.on('locationerror' , function (e){
-    alert(e.message);
-})
-
-function locate()
-{
-    map.locate({setView : true , maxZoom: 17});
-}

@@ -19,6 +19,10 @@ function getLocations($params=[])
     {
         $condition = "where verified = {$params['verified']}";
     }
+    elseif (isset($params['keyword']))
+    {
+        $condition = " WHERE verified = 1 AND Title LIKE '%{$params['keyword']}%'";
+    }
     $sql = "SELECT * FROM locations $condition";
     $stmt = $pdo -> prepare($sql);
     $stmt -> execute();

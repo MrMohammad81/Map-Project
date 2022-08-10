@@ -22,13 +22,13 @@
         <div class="search-box">
             <input type="text" id="search" placeholder="دنبال کجا می گردی؟" autocomplete="off">
             <div class="clear"></div>
-            <div class="search-results" style="display:none"></div>
+            <div class="search-results" style="display: none">
+            </div>
         </div>
     </div>
     <div class="mapContainer">
         <div id="map"></div>
     </div>
-    <img src="assets/img/current.png" class="currentLoc">
 </div>
 
 <div class="modal-overlay" style="display: none;">
@@ -74,6 +74,7 @@
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/script.js <?= '?v=' . rand(99,9999) ?>"></script>
 <script>
+    // get id
     <?php if ($location): ?>
          L.marker([<?= $location -> lat?> , <?= $location -> lng?>]).addTo(map).bindPopup("<?= $location -> Title?>").openPopup();
     <?php endif; ?>
@@ -81,6 +82,21 @@
        $('.mapContainer').click(function (){
            locate();
        })
+        // search box
+           $('#search').keyup(function (){
+               var searchInput = $(this);
+               var result = $('.search-results');
+               result.html("درحال جستوجو ....");
+               $.ajax({
+                   url : '<?=site_url("process/search.php")?>',
+                   method : 'post',
+                   data : {keyword : searchInput.val()},
+                   success : function (response)
+                   {
+                       result.slideDown().html(response);
+                   }
+               })
+           })
     });
 </script>
 </html>
